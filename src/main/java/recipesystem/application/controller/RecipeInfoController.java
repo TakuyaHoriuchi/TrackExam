@@ -1,4 +1,4 @@
-package recipesystem.controller;
+package recipesystem.application.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RecipeInfoController {
-  // TODO Domain層のInterfaceを用意・Controller層のテストケースを用意して最低限実装する.
-  // TODO Controller層の実装.
   // TODO Infrastructure層のInterfaceを用意・Domain層のテストケースを用意して最低限実装する.
   // TODO Domain層の実装.
   // TODO Infrastructure層の実装及び(あれば)テストケース追加.
@@ -22,5 +20,7 @@ public class RecipeInfoController {
   public String rootAccess() {
     return "root";
   }
+  
+  
 
 }
