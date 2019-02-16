@@ -13,6 +13,14 @@ public class CreateRecipeServiceMock implements CreateRecipeService {
 
   @Override
   public Recipe create(Recipe recipe) {
-    return recipe;
+    if (recipe.getTitle() == null
+        || recipe.getServes() == null
+        || recipe.getMakingTime() == null
+        || recipe.getIngredients() == null
+        || recipe.getCost() == null) {
+      return null;
+    } else {
+      return recipe;
+    }
   }
 }
