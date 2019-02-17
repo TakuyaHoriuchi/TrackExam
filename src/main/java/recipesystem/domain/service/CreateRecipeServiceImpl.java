@@ -2,7 +2,6 @@ package recipesystem.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import recipesystem.domain.model.Recipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
@@ -27,16 +26,16 @@ public class CreateRecipeServiceImpl implements CreateRecipeService {
         || recipe.getIngredients() == null
         || recipe.getCost() == null) {
       return null;
-    } else {
-      RecipeEntity entity = new RecipeEntity(null,
-                                             recipe.getTitle(),
-                                             recipe.getMakingTime(),
-                                             recipe.getServes(),
-                                             recipe.getIngredients(),
-                                             Integer.parseInt(recipe.getCost()));
-      RecipeEntity result = recipeRepos.save(entity);
-      return mapperResultToResponse(result);
-    }
+    } 
+    
+    RecipeEntity entity = new RecipeEntity(null,
+                                           recipe.getTitle(),
+                                           recipe.getMakingTime(),
+                                           recipe.getServes(),
+                                           recipe.getIngredients(),
+                                           Integer.parseInt(recipe.getCost()));
+    RecipeEntity result = recipeRepos.save(entity);
+    return mapperResultToResponse(result);
   }
 
   private Recipe mapperResultToResponse(RecipeEntity result) {

@@ -42,7 +42,7 @@ public class ReadRecipeController {
    */
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
-  public RecipeInfoResponse readRecipeForId(@PathVariable("id") Integer id) {
+  public RecipeInfoResponse readRecipeFromId(@PathVariable("id") Integer id) {
     Recipe readRecipe = recipeService.read(id);
     return generateRecipeResponse(readRecipe);
   }

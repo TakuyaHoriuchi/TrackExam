@@ -2,6 +2,9 @@ package recipesystem.domain.service;
 
 import recipesystem.domain.model.Recipe;
 
+/**
+ * レシピの新規作成サービス.
+ */
 public interface CreateRecipeService {
 
   /** 

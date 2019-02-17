@@ -1,12 +1,10 @@
 package recipesystem.domain.service;
 
-import org.springframework.stereotype.Component;
-
 /**
  * {@link:DeleteRecipeService}のStub実装クラス.
  * 実装後に削除する.
  */
-@Component
+//@Component
 public class DeleteRecipeServiceMock implements DeleteRecipeService {
 
   @Override

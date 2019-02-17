@@ -2,74 +2,68 @@ package recipesystem.domain.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import recipesystem.domain.model.Recipe;
 import recipesystem.domain.repository.RecipeRepository;
+import recipesystem.infrastructure.model.RecipeEntity;
 
 /**
- * {@link:ReadRecipeService}のStub実装クラス.
+ * {@link:ReadRecipeService}の実装クラス.
  * 実装後に削除する.
  */
-//@Component
+@Component
 public class ReadRecipeServiceImpl implements ReadRecipeService {
 
   @Autowired
   RecipeRepository recipeRepos;
   
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public List<Recipe> readAll() {
-    return createAllRecipes();
+    List<RecipeEntity> allRecipes = recipeRepos.findAll();
+    return mapperRecipesResponseFromResult(allRecipes);
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public Recipe read(Integer id) {
-    return createRecipe();
+    Optional<RecipeEntity> result = recipeRepos.findById(id);
+    if (!result.isPresent()) {
+      return null;
+    }
+    return mapperRecipeResponseFromResult(result);
   }
+
   
-  private List<Recipe> createAllRecipes() {
-    Recipe firstRecipe = new Recipe();
-    firstRecipe.setId(Long.valueOf(1));
-    firstRecipe.setTitle("チキンカレー");
-    firstRecipe.setMakingTime("45分");
-    firstRecipe.setServes("4人");
-    firstRecipe.setIngredients("玉ねぎ,肉,スパイス");
-    firstRecipe.setCost("1000");
-    
-    Recipe secondRecipe = new Recipe();
-    secondRecipe.setId(Long.valueOf(2));
-    secondRecipe.setTitle("オムライス");
-    secondRecipe.setMakingTime("30分");
-    secondRecipe.setServes("2人");
-    secondRecipe.setIngredients("玉ねぎ,卵,スパイス,醤油");
-    secondRecipe.setCost("700");
-    
-    Recipe thirdRecipe = new Recipe();
-    thirdRecipe.setId(Long.valueOf(3));
-    thirdRecipe.setTitle("トマトスープ");
-    thirdRecipe.setMakingTime("15分");
-    thirdRecipe.setServes("5人");
-    thirdRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
-    thirdRecipe.setCost("450");
-    
-    List<Recipe> recipes = new ArrayList<>();
-    recipes.add(firstRecipe);
-    recipes.add(secondRecipe);
-    recipes.add(thirdRecipe);
-    
-    return recipes;
+  private List<Recipe> mapperRecipesResponseFromResult(List<RecipeEntity> allRecipes) {
+    List<Recipe> response = new ArrayList<>();
+    for (RecipeEntity entity: allRecipes) {
+      Recipe recipe = new Recipe();
+      recipe.setTitle(entity.getTitle());
+      recipe.setMakingTime(entity.getMakingTime());
+      recipe.setServes(entity.getServes());
+      recipe.setIngredients(entity.getIngredients());
+      recipe.setCost(entity.getCost().toString());
+      response.add(recipe);
+    }
+    return response;
   }
-  
-  private Recipe createRecipe() {
-    Recipe recipe = new Recipe();
-    recipe.setCost("1000");
-    recipe.setMakingTime("45分");
-    recipe.setIngredients("玉ねぎ,肉,スパイス");
-    recipe.setServes("4人");
-    recipe.setTitle("チキンカレー");
-    return recipe;
+
+  private Recipe mapperRecipeResponseFromResult(Optional<RecipeEntity> result) {
+    RecipeEntity recipeEntity = result.get();
+    Recipe response = new Recipe();
+    response.setTitle(recipeEntity.getTitle());
+    response.setMakingTime(recipeEntity.getMakingTime());
+    response.setServes(recipeEntity.getServes());
+    response.setIngredients(recipeEntity.getIngredients());
+    response.setCost(recipeEntity.getCost().toString());
+    return response;
   }
 
 }

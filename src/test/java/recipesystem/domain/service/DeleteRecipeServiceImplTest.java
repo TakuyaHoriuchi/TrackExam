@@ -1,8 +1,11 @@
 package recipesystem.domain.service;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,20 +47,17 @@ public class DeleteRecipeServiceImplTest {
   
   @Test
   public void test_SuccessToReadRecipeFromId() {
+    // precheck
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
+    // execute
     Boolean actual = testTarget.delete(2);
-    
+    // assert
     assertThat(actual, is(true));
-//    assertThat(recipeRepository.count(), is(equalTo(2L)));
-//    RecipeEntity secondEntity = entityManager.find(RecipeEntity.class, 2);
-//    assertThat(secondEntity.getId(), is(equalTo(2)));
-//    assertThat(secondEntity.getTitle(), is(equalTo("トマトスープ")));
-//    assertThat(secondEntity.getMakingTime(), is(equalTo("15分")));
-//    assertThat(secondEntity.getServes(), is(equalTo("5人")));
-//    assertThat(secondEntity.getIngredients(), is(equalTo("玉ねぎ, トマト, スパイス, 水")));
-//    assertThat(secondEntity.getCost(), is(450));
+    assertThat(recipeRepository.count(), is(equalTo(2L)));
+    Optional<RecipeEntity> findResult = recipeRepository.findById(2);
+    assertThat(findResult.isPresent(), is(equalTo(false)));
   }
   
   

@@ -3,22 +3,25 @@ package recipesystem.domain.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import recipesystem.domain.model.Recipe;
 
 /**
  * {@link:ReadRecipeService}のStub実装クラス.
  * 実装後に削除する.
  */
-@Component
 public class ReadRecipeServiceMock implements ReadRecipeService {
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public List<Recipe> readAll() {
     return createAllRecipes();
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public Recipe read(Integer id) {
     return createRecipe();

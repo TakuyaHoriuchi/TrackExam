@@ -67,13 +67,13 @@ public class ReadRecipeControllerTest {
   
 
   @Test
-  public void test_SuccessToReadRecipeForId() {
+  public void test_SuccessToReadRecipeFromId() {
     // setup
     Recipe recipe = createSuccessRecipe();
     when(recipeService.read(1)).thenReturn(recipe);
     
     // execute
-    RecipeInfoResponse actual = testTarget.readRecipeForId(1);
+    RecipeInfoResponse actual = testTarget.readRecipeFromId(1);
     
     // expected
     String expectedMessage = "Recipe details by id";
@@ -84,12 +84,12 @@ public class ReadRecipeControllerTest {
   }
   
   @Test
-  public void test_FailToReadRecipeForId() {
+  public void test_FailToReadRecipeFromId() {
     // setup
     when(recipeService.read(100)).thenReturn(null);
     
     // execute
-    RecipeInfoResponse actual = testTarget.readRecipeForId(100);
+    RecipeInfoResponse actual = testTarget.readRecipeFromId(100);
     
     // expected
     String expectedMessage = "No Recipe found";

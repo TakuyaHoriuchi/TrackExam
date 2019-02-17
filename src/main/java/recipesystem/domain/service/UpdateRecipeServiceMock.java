@@ -1,14 +1,12 @@
 package recipesystem.domain.service;
 
-import org.springframework.stereotype.Component;
-
 import recipesystem.domain.model.Recipe;
 
 /**
  * {@link:UpdateRecipeService}のStub実装クラス.
  * 実装後に削除する.
  */
-@Component
+//@Component
 public class UpdateRecipeServiceMock implements UpdateRecipeService {
 
   @Override
