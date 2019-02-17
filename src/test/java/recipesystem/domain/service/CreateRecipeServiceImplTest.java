@@ -2,6 +2,7 @@ package recipesystem.domain.service;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -39,7 +40,8 @@ public class CreateRecipeServiceImplTest {
   private RecipeEntity recipe2 = new RecipeEntity(null, "tester2", "15分", "2人", "tester", 12345);
   
   /** テスト実施前のセットアップ. */
-  @Before   public void setup() {
+  @Before
+  public void setup() {
     testTarget.recipeRepos = recipeRepository;
     entityManager.persist(recipe1);
     entityManager.persist(recipe2);
@@ -47,15 +49,35 @@ public class CreateRecipeServiceImplTest {
   
   @Test
   public void test_SuccessToCreateRecipe() {
-    Recipe recipe = createSuccessRecipe();
+    // precheck
     if (recipeRepository.count() != 2) {
       fail("Tableの初期化に失敗しました。");
     }
-    ResponseRecipe actual = testTarget.create(recipe);
-    ResponseRecipe expected = createSuccessResponseRecipe();
+    Recipe recipe = createSuccessRecipe();
     
+    // execute
+    ResponseRecipe actual = testTarget.create(recipe);
+    
+    // assert
+    ResponseRecipe expected = createSuccessResponseRecipe();
     assertThat(actual, is(samePropertyValuesAs(expected)));
     assertThat(recipeRepository.count(), is(equalTo(3L)));
+  }
+  
+  @Test
+  public void test_FailToCreateRecipe() {
+    // precheck
+    if (recipeRepository.count() != 2) {
+      fail("Tableの初期化に失敗しました。");
+    }
+    Recipe recipe = new Recipe();
+    
+    // execute
+    ResponseRecipe actual = testTarget.create(recipe);
+    
+    // assert
+    assertThat(actual, is(nullValue()));
+    assertThat(recipeRepository.count(), is(equalTo(2L)));
   }
   
   private Recipe createSuccessRecipe() {

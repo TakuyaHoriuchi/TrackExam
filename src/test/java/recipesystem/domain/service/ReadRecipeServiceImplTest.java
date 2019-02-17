@@ -1,6 +1,7 @@
 package recipesystem.domain.service;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -50,24 +51,46 @@ public class ReadRecipeServiceImplTest {
   
   @Test
   public void test_SuccessToReadAllRecipes() {
+    // precheck
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
-    List<ResponseRecipe> actual = testTarget.readAll();
-    List<ResponseRecipe> expected = createAllRecipes();
     
+    // execute
+    List<ResponseRecipe> actual = testTarget.readAll();
+    
+    // assert
+    List<ResponseRecipe> expected = createAllRecipes();
     assertThat(actual, is(samePropertyValuesAs(expected)));
   }
   
   @Test
   public void test_SuccessToReadRecipeFromId() {
+    // precheck
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
-    ResponseRecipe actual = testTarget.read(1);
-    ResponseRecipe expected = createExpectedRecipe();
     
+    // execute
+    ResponseRecipe actual = testTarget.read(1);
+    
+    // assert
+    ResponseRecipe expected = createExpectedRecipe();
     assertThat(actual, is(samePropertyValuesAs(expected)));
+  }
+  
+  @Test
+  public void test_FailToReadRecipeFromId() {
+    // precheck
+    if (recipeRepository.count() != 3) {
+      fail("Tableの初期化に失敗しました。");
+    }
+    
+    // execute
+    ResponseRecipe actual = testTarget.read(100);
+    
+    // assert
+    assertThat(actual, is(nullValue()));
   }
 
   private List<ResponseRecipe> createAllRecipes() {

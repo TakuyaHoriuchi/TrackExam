@@ -2,6 +2,7 @@ package recipesystem.domain.service;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -51,13 +52,17 @@ public class UpdateRecipeServiceImplTest {
   
   @Test
   public void test_SuccessToUpdateRecipe() {
+    // precheck
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
     Recipe requestRecipe = createRequestRecipe();
-    ResponseRecipe actual = testTarget.update(2, requestRecipe);
-    ResponseRecipe expected = createExpectedRequestRecipe();
     
+    // execute
+    ResponseRecipe actual = testTarget.update(2, requestRecipe);
+    
+    // assert
+    ResponseRecipe expected = createExpectedRequestRecipe();
     assertThat(actual, is(samePropertyValuesAs(expected)));
     Optional<RecipeEntity> findResult = recipeRepository.findById(2);
     assertThat(findResult.isPresent(), is(equalTo(true)));
@@ -69,6 +74,32 @@ public class UpdateRecipeServiceImplTest {
     assertThat(readEntity.getServes(), is(equalTo("5人")));
     assertThat(readEntity.getIngredients(), is(equalTo("玉ねぎ, トマト, スパイス, 水")));
     assertThat(readEntity.getCost(), is(equalTo(450)));
+    
+  }
+  
+  @Test
+  public void test_FailToUpdateRecipe() {
+    // precheck
+    if (recipeRepository.count() != 3) {
+      fail("Tableの初期化に失敗しました。");
+    }
+    Recipe requestRecipe = new Recipe();
+    
+    // execute
+    ResponseRecipe actual = testTarget.update(100, requestRecipe);
+    
+    // assert
+    assertThat(actual, is(nullValue()));
+    Optional<RecipeEntity> findResult = recipeRepository.findById(2);
+    assertThat(findResult.isPresent(), is(equalTo(true)));
+    RecipeEntity readEntity = findResult.get();
+    assertThat(recipeRepository.count(), is(equalTo(3L)));
+    assertThat(readEntity.getId(), is(equalTo(2)));
+    assertThat(readEntity.getTitle(), is(equalTo("オムライス")));
+    assertThat(readEntity.getMakingTime(), is(equalTo("30分")));
+    assertThat(readEntity.getServes(), is(equalTo("2人")));
+    assertThat(readEntity.getIngredients(), is(equalTo("玉ねぎ,卵,スパイス,醤油")));
+    assertThat(readEntity.getCost(), is(equalTo(700)));
     
   }
 

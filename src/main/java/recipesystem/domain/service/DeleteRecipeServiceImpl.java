@@ -1,6 +1,7 @@
 package recipesystem.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import recipesystem.domain.repository.RecipeRepository;
 
@@ -21,7 +22,7 @@ public class DeleteRecipeServiceImpl implements DeleteRecipeService {
   public Boolean delete(Integer id) {
     try {
       recipeRepos.deleteById(id);
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException | EmptyResultDataAccessException e) {
       return false;
     }
     return true;

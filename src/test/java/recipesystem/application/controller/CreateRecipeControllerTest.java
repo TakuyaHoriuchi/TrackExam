@@ -39,10 +39,13 @@ public class CreateRecipeControllerTest {
     ResponseRecipe responseRecipe = createSuccessResponseRecipe();
     when(recipeService.create(requestRecipe)).thenReturn(responseRecipe);
     
+    // execute
     RecipeInfoResponse actual = testTarget.createRecipe(requestRecipe);
+    
     // expected
     String expectedMessage = "Recipe successfully created!";
     
+    // assert
     assertThat(actual.getMessage(), is(equalTo(expectedMessage)));
     assertThat(actual.getRecipe().get(0), is(samePropertyValuesAs(responseRecipe)));
   }
@@ -55,11 +58,14 @@ public class CreateRecipeControllerTest {
     Recipe requestRecipe = new Recipe();
     when(recipeService.create(requestRecipe)).thenReturn(null);
     
+    // execute
     RecipeInfoResponse actual = testTarget.createRecipe(requestRecipe);
+    
     // expected
     String expectedMessage = "Recipe creation failed!";
     String expectedRequired = "title, making_time, serves, ingredients, cost";
     
+    // assert
     assertThat(actual.getMessage(), is(equalTo(expectedMessage)));
     assertThat(actual.getRequired(), is(equalTo(expectedRequired)));
   }

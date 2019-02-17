@@ -40,7 +40,8 @@ public class DeleteRecipeServiceImplTest {
       new RecipeEntity(null, "トマトスープ", "15分", "5人", "玉ねぎ, トマト, スパイス, 水", 450);
   
   /** テスト実施前のセットアップ. */
-  @Before   public void setup() {
+  @Before
+  public void setup() {
     testTarget.recipeRepos = recipeRepository;
     entityManager.persist(recipe1);
     entityManager.persist(recipe2);
@@ -48,18 +49,36 @@ public class DeleteRecipeServiceImplTest {
   }
   
   @Test
-  public void test_SuccessToReadRecipeFromId() {
+  public void test_SuccessToDeleteRecipe() {
     // precheck
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
+    
     // execute
     Boolean actual = testTarget.delete(2);
+    
     // assert
     assertThat(actual, is(true));
     assertThat(recipeRepository.count(), is(equalTo(2L)));
     Optional<RecipeEntity> findResult = recipeRepository.findById(2);
     assertThat(findResult.isPresent(), is(equalTo(false)));
+  }
+  
+  @Test
+  public void test_FailToDeleteRecipe() {
+    // precheck
+    if (recipeRepository.count() != 3) {
+      fail("Tableの初期化に失敗しました。");
+    }
+    
+    // execute
+    Boolean actual;
+    actual = testTarget.delete(100);
+
+    // assert
+    assertThat(actual, is(false));
+    assertThat(recipeRepository.count(), is(equalTo(3L)));
   }
   
   
