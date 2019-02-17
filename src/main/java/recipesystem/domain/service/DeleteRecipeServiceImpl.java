@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import recipesystem.domain.repository.RecipeRepository;
 
 /**
- * {@link:DeleteRecipeService}の実装クラス.
+ * {@link DeleteRecipeService}の実装クラス.
  * 実装後に削除する.
  */
 @Component

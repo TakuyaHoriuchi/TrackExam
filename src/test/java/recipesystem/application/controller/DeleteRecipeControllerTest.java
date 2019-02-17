@@ -16,7 +16,7 @@ import recipesystem.application.payload.RecipeInfoResponse;
 import recipesystem.domain.service.DeleteRecipeService;
 
 /**
- * {@link:DeleteRecipeController}のテスト.
+ * {@link DeleteRecipeController}のテスト.
  *
  */
 public class DeleteRecipeControllerTest {

@@ -8,7 +8,7 @@ import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
 /**
- * {@link:UpdateRecipeService}の実装クラス.
+ * {@link UpdateRecipeService}の実装クラス.
  * 実装後に削除する.
  */
 @Component
@@ -21,13 +21,13 @@ public class UpdateRecipeServiceImpl implements UpdateRecipeService {
    * {@inheritDoc}.
    */
   @Override
-  public Recipe update(int id, Recipe requestRecipe) {
+  public Recipe update(int id, Recipe recipe) {
     Optional<RecipeEntity> result = recipeRepos.findById(id);
     if (!result.isPresent()) {
       return null;
     }
     RecipeEntity recipeEntity = result.get();
-    mapperPayloadToRequest(requestRecipe, recipeEntity);
+    mapperPayloadToRequest(recipe, recipeEntity);
     RecipeEntity savedEntity = recipeRepos.save(recipeEntity);
     return mapperResponseFromResult(savedEntity);
   }

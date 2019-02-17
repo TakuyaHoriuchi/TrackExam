@@ -18,6 +18,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
+/**
+ * {@link DeleteRecipeServiceImpl}のテスト.
+ */
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

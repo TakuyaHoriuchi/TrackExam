@@ -25,6 +25,7 @@ public class CreateRecipeController {
   
   /**
    * レシピを新規追加するメソッド.
+   * @param recipe 新規に追加するレシピ情報.
    * @return 処理結果内容.
    */
   @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

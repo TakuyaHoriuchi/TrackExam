@@ -10,7 +10,7 @@ import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
 /**
- * {@link:ReadRecipeService}の実装クラス.
+ * {@link ReadRecipeService}の実装クラス.
  * 実装後に削除する.
  */
 @Component
@@ -45,6 +45,7 @@ public class ReadRecipeServiceImpl implements ReadRecipeService {
     List<Recipe> response = new ArrayList<>();
     for (RecipeEntity entity: allRecipes) {
       Recipe recipe = new Recipe();
+      recipe.setId(Long.valueOf(entity.getId()));
       recipe.setTitle(entity.getTitle());
       recipe.setMakingTime(entity.getMakingTime());
       recipe.setServes(entity.getServes());

@@ -17,6 +17,7 @@ public interface ReadRecipeService {
 
   /**
    * IDのレシピを取得するメソッド.
+   * @param id 取得対象レシピのID.
    * @return レシピ情報.
    */
   public Recipe read(Integer id);

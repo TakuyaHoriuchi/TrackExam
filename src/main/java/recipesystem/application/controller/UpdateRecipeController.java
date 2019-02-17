@@ -26,13 +26,15 @@ public class UpdateRecipeController {
 
   /**
    * 指定したIDのレシピを取得するメソッド.
+   * @param id 更新対象レシピのID.
+   * @param recipe レシピの更新情報.
    * @return 処理結果内容.
    */
   @PatchMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public RecipeInfoResponse updateRecipe(@PathVariable("id") int id,
-                                         @RequestBody Recipe requestRecipe) {
-    Recipe updatedRecipe = recipeService.update(id, requestRecipe);
+                                         @RequestBody Recipe recipe) {
+    Recipe updatedRecipe = recipeService.update(id, recipe);
     return generateRecipeResponse(updatedRecipe);
   }
   

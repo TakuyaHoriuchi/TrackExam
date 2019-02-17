@@ -22,7 +22,7 @@ import recipesystem.domain.model.Recipe;
 import recipesystem.domain.service.ReadRecipeService;
 
 /**
- * {@link:ReadRecipeController}のテスト.
+ * {@link ReadRecipeController}のテスト.
  *
  */
 public class ReadRecipeControllerTest {

@@ -21,6 +21,9 @@ import recipesystem.domain.model.Recipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
+/**
+ * {@link ReadRecipeServiceImpl}のテスト.
+ */
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

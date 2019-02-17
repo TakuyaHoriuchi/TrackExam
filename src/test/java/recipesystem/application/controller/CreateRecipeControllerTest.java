@@ -18,7 +18,7 @@ import recipesystem.domain.model.Recipe;
 import recipesystem.domain.service.CreateRecipeService;
 
 /**
- * {@link:CreateRecipeController}のテスト.
+ * {@link CreateRecipeController}のテスト.
  *
  */
 public class CreateRecipeControllerTest {

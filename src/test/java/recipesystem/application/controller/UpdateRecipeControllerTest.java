@@ -18,7 +18,7 @@ import recipesystem.domain.model.Recipe;
 import recipesystem.domain.service.UpdateRecipeService;
 
 /**
- * {@link:UpdateRecipeController}のテスト.
+ * {@link UpdateRecipeController}のテスト.
  *
  */
 public class UpdateRecipeControllerTest {

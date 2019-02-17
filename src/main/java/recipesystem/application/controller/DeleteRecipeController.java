@@ -22,6 +22,7 @@ public class DeleteRecipeController {
 
   /**
    * 指定したIDのレシピを取得するメソッド.
+   * @param id 削除対象レシピのID.
    * @return 処理結果内容.
    */
   @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

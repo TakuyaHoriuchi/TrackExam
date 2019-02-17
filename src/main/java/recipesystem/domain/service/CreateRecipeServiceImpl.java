@@ -7,7 +7,7 @@ import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
 /**
- * {@link:CreateRecipeService}の実装クラス.
+ * {@link CreateRecipeService}の実装クラス.
  */
 @Component
 public class CreateRecipeServiceImpl implements CreateRecipeService {
