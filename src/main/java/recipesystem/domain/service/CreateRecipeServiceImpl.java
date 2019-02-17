@@ -3,8 +3,8 @@ package recipesystem.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import recipesystem.application.payload.RequestRecipe;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
+import recipesystem.domain.model.RequestRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
@@ -21,7 +21,7 @@ public class CreateRecipeServiceImpl implements CreateRecipeService {
    * {@inheritDoc}.
    */
   @Override
-  public Recipe create(RequestRecipe recipe) {
+  public ResponseRecipe create(RequestRecipe recipe) {
     if (recipe.getTitle() == null
         || recipe.getServes() == null
         || recipe.getMakingTime() == null
@@ -40,8 +40,8 @@ public class CreateRecipeServiceImpl implements CreateRecipeService {
     return mapperResultToResponse(result);
   }
 
-  private Recipe mapperResultToResponse(RecipeEntity result) {
-    Recipe response = new Recipe();
+  private ResponseRecipe mapperResultToResponse(RecipeEntity result) {
+    ResponseRecipe response = new ResponseRecipe();
     response.setTitle(result.getTitle());
     response.setMakingTime(result.getMakingTime());
     response.setServes(result.getServes());

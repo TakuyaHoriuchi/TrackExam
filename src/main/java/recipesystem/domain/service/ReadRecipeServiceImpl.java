@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
@@ -23,7 +23,7 @@ public class ReadRecipeServiceImpl implements ReadRecipeService {
    * {@inheritDoc}.
    */
   @Override
-  public List<Recipe> readAll() {
+  public List<ResponseRecipe> readAll() {
     List<RecipeEntity> allRecipes = recipeRepos.findAll();
     return mapperRecipesResponseFromResult(allRecipes);
   }
@@ -32,7 +32,7 @@ public class ReadRecipeServiceImpl implements ReadRecipeService {
    * {@inheritDoc}.
    */
   @Override
-  public Recipe read(Integer id) {
+  public ResponseRecipe read(Integer id) {
     Optional<RecipeEntity> result = recipeRepos.findById(id);
     if (!result.isPresent()) {
       return null;
@@ -41,10 +41,10 @@ public class ReadRecipeServiceImpl implements ReadRecipeService {
   }
 
   
-  private List<Recipe> mapperRecipesResponseFromResult(List<RecipeEntity> allRecipes) {
-    List<Recipe> response = new ArrayList<>();
+  private List<ResponseRecipe> mapperRecipesResponseFromResult(List<RecipeEntity> allRecipes) {
+    List<ResponseRecipe> response = new ArrayList<>();
     for (RecipeEntity entity: allRecipes) {
-      Recipe recipe = new Recipe();
+      ResponseRecipe recipe = new ResponseRecipe();
       recipe.setId(Long.valueOf(entity.getId()));
       recipe.setTitle(entity.getTitle());
       recipe.setMakingTime(entity.getMakingTime());
@@ -56,9 +56,9 @@ public class ReadRecipeServiceImpl implements ReadRecipeService {
     return response;
   }
 
-  private Recipe mapperRecipeResponseFromResult(Optional<RecipeEntity> result) {
+  private ResponseRecipe mapperRecipeResponseFromResult(Optional<RecipeEntity> result) {
     RecipeEntity recipeEntity = result.get();
-    Recipe response = new Recipe();
+    ResponseRecipe response = new ResponseRecipe();
     response.setTitle(recipeEntity.getTitle());
     response.setMakingTime(recipeEntity.getMakingTime());
     response.setServes(recipeEntity.getServes());

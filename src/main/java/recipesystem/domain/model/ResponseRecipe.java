@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * レシピ情報.
+ * レスポンス表示用のレシピクラス.
  *
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Recipe {
+public class ResponseRecipe {
   /* レシピid. */
   @JsonProperty("id")
   private Long id;

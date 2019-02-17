@@ -14,7 +14,8 @@ import org.mockito.MockitoAnnotations;
 
 import recipesystem.application.controller.CreateRecipeController;
 import recipesystem.application.payload.RecipeInfoResponse;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
+import recipesystem.domain.model.RequestRecipe;
 import recipesystem.domain.service.CreateRecipeService;
 
 /**
@@ -35,21 +36,24 @@ public class CreateRecipeControllerTest {
   @Test
   public void test_SuccessToCreateRecipe() {
     // setup
-    Recipe requestRecipe = createSuccessRecipe();
-    when(recipeService.create(requestRecipe)).thenReturn(requestRecipe);
+    RequestRecipe requestRecipe = createSuccessRequestRecipe();
+    ResponseRecipe responseRecipe = createSuccessResponseRecipe();
+    when(recipeService.create(requestRecipe)).thenReturn(responseRecipe);
     
     RecipeInfoResponse actual = testTarget.createRecipe(requestRecipe);
     // expected
     String expectedMessage = "Recipe successfully created!";
     
     assertThat(actual.getMessage(), is(equalTo(expectedMessage)));
-    assertThat(actual.getRecipe().get(0), is(samePropertyValuesAs(requestRecipe)));
+    assertThat(actual.getRecipe().get(0), is(samePropertyValuesAs(responseRecipe)));
   }
   
+
+
   @Test
   public void test_FailToCreateRecipe() {
     // setup
-    Recipe requestRecipe = new Recipe();
+    RequestRecipe requestRecipe = new RequestRecipe();
     when(recipeService.create(requestRecipe)).thenReturn(null);
     
     RecipeInfoResponse actual = testTarget.createRecipe(requestRecipe);
@@ -61,8 +65,18 @@ public class CreateRecipeControllerTest {
     assertThat(actual.getRequired(), is(equalTo(expectedRequired)));
   }
 
-  private Recipe createSuccessRecipe() {
-    Recipe requestRecipe = new Recipe();
+  private RequestRecipe createSuccessRequestRecipe() {
+    RequestRecipe requestRecipe = new RequestRecipe();
+    requestRecipe.setCost(450);
+    requestRecipe.setMakingTime("15分");
+    requestRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
+    requestRecipe.setServes("5人");
+    requestRecipe.setTitle("トマトスープ");
+    return requestRecipe;
+  }
+  
+  private ResponseRecipe createSuccessResponseRecipe() {
+    ResponseRecipe requestRecipe = new ResponseRecipe();
     requestRecipe.setCost("450");
     requestRecipe.setMakingTime("15分");
     requestRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");

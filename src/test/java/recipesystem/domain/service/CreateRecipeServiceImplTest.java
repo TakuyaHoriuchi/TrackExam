@@ -14,7 +14,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.RequestRecipe;
+import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
@@ -46,23 +47,34 @@ public class CreateRecipeServiceImplTest {
   
   @Test
   public void test_SuccessToCreateRecipe() {
-    Recipe recipe = createSuccessRecipe();
+    RequestRecipe recipe = createSuccessRecipe();
     if (recipeRepository.count() != 2) {
       fail("Tableの初期化に失敗しました。");
     }
-    Recipe actual = testTarget.create(recipe);
+    ResponseRecipe actual = testTarget.create(recipe);
+    ResponseRecipe expected = createSuccessResponseRecipe();
     
-    assertThat(actual, is(samePropertyValuesAs(recipe)));
+    assertThat(actual, is(samePropertyValuesAs(expected)));
     assertThat(recipeRepository.count(), is(equalTo(3L)));
   }
   
-  private Recipe createSuccessRecipe() {
-    Recipe requestRecipe = new Recipe();
-    requestRecipe.setCost("450");
+  private RequestRecipe createSuccessRecipe() {
+    RequestRecipe requestRecipe = new RequestRecipe();
+    requestRecipe.setCost(450);
     requestRecipe.setMakingTime("15分");
     requestRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
     requestRecipe.setServes("5人");
     requestRecipe.setTitle("トマトスープ");
     return requestRecipe;
+  }
+  
+  private ResponseRecipe createSuccessResponseRecipe() {
+    ResponseRecipe responseRecipe = new ResponseRecipe();
+    responseRecipe.setCost("450");
+    responseRecipe.setMakingTime("15分");
+    responseRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
+    responseRecipe.setServes("5人");
+    responseRecipe.setTitle("トマトスープ");
+    return responseRecipe;
   }
 }

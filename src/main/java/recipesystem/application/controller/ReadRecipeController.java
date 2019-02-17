@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import recipesystem.application.payload.RecipeInfoResponse;
 import recipesystem.application.payload.RecipesInfoResponse;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.service.ReadRecipeService;
 
 /**
@@ -32,7 +32,7 @@ public class ReadRecipeController {
   @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public RecipesInfoResponse readAllRecipes() {
-    List<Recipe> readRecipes = recipeService.readAll();
+    List<ResponseRecipe> readRecipes = recipeService.readAll();
     return generateRecipesResponse(readRecipes);
   }
 
@@ -44,11 +44,11 @@ public class ReadRecipeController {
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public RecipeInfoResponse readRecipeFromId(@PathVariable("id") Integer id) {
-    Recipe readRecipe = recipeService.read(id);
+    ResponseRecipe readRecipe = recipeService.read(id);
     return generateRecipeResponse(readRecipe);
   }
 
-  private RecipesInfoResponse generateRecipesResponse(List<Recipe> readRecipes) {
+  private RecipesInfoResponse generateRecipesResponse(List<ResponseRecipe> readRecipes) {
     RecipesInfoResponse response = new RecipesInfoResponse();
     if (readRecipes.isEmpty()) {
       response.setMessage("No Recipe found");
@@ -58,7 +58,7 @@ public class ReadRecipeController {
     return response;
   }
   
-  private RecipeInfoResponse generateRecipeResponse(Recipe readRecipe) {
+  private RecipeInfoResponse generateRecipeResponse(ResponseRecipe readRecipe) {
     RecipeInfoResponse response = new RecipeInfoResponse();
     if (readRecipe == null) {
       response.setMessage("No Recipe found");

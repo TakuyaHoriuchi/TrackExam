@@ -18,7 +18,7 @@ import org.mockito.MockitoAnnotations;
 import recipesystem.application.controller.ReadRecipeController;
 import recipesystem.application.payload.RecipeInfoResponse;
 import recipesystem.application.payload.RecipesInfoResponse;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.service.ReadRecipeService;
 
 /**
@@ -39,7 +39,7 @@ public class ReadRecipeControllerTest {
   @Test
   public void test_SuccessToReadAllRecipes() {
     // setup
-    List<Recipe> allRecipes = createSuccessAllRecipes();
+    List<ResponseRecipe> allRecipes = createSuccessAllRecipes();
     when(recipeService.readAll()).thenReturn(allRecipes);
     
     // execute
@@ -52,7 +52,7 @@ public class ReadRecipeControllerTest {
   @Test
   public void test_FailToReadAllRecipes() {
     // setup
-    List<Recipe> emptyRecipes = new ArrayList<>();
+    List<ResponseRecipe> emptyRecipes = new ArrayList<>();
     when(recipeService.readAll()).thenReturn(emptyRecipes);
     
     // execute
@@ -69,7 +69,7 @@ public class ReadRecipeControllerTest {
   @Test
   public void test_SuccessToReadRecipeFromId() {
     // setup
-    Recipe recipe = createSuccessRecipe();
+    ResponseRecipe recipe = createSuccessRecipe();
     when(recipeService.read(1)).thenReturn(recipe);
     
     // execute
@@ -98,8 +98,8 @@ public class ReadRecipeControllerTest {
     assertThat(actual.getMessage(), is(equalTo(expectedMessage)));
   }
 
-  private List<Recipe> createSuccessAllRecipes() {
-    Recipe firstRecipe = new Recipe();
+  private List<ResponseRecipe> createSuccessAllRecipes() {
+    ResponseRecipe firstRecipe = new ResponseRecipe();
     firstRecipe.setId(Long.valueOf(1));
     firstRecipe.setTitle("チキンカレー");
     firstRecipe.setMakingTime("45分");
@@ -107,7 +107,7 @@ public class ReadRecipeControllerTest {
     firstRecipe.setIngredients("玉ねぎ,肉,スパイス");
     firstRecipe.setCost("1000");
     
-    Recipe secondRecipe = new Recipe();
+    ResponseRecipe secondRecipe = new ResponseRecipe();
     secondRecipe.setId(Long.valueOf(2));
     secondRecipe.setTitle("オムライス");
     secondRecipe.setMakingTime("30分");
@@ -115,7 +115,7 @@ public class ReadRecipeControllerTest {
     secondRecipe.setIngredients("玉ねぎ,卵,スパイス,醤油");
     secondRecipe.setCost("700");
     
-    Recipe thirdRecipe = new Recipe();
+    ResponseRecipe thirdRecipe = new ResponseRecipe();
     thirdRecipe.setId(Long.valueOf(3));
     thirdRecipe.setTitle("トマトスープ");
     thirdRecipe.setMakingTime("15分");
@@ -123,7 +123,7 @@ public class ReadRecipeControllerTest {
     thirdRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
     thirdRecipe.setCost("450");
     
-    List<Recipe> recipes = new ArrayList<>();
+    List<ResponseRecipe> recipes = new ArrayList<>();
     recipes.add(firstRecipe);
     recipes.add(secondRecipe);
     recipes.add(thirdRecipe);
@@ -131,8 +131,8 @@ public class ReadRecipeControllerTest {
     return recipes;
   }
   
-  private Recipe createSuccessRecipe() {
-    Recipe recipe = new Recipe();
+  private ResponseRecipe createSuccessRecipe() {
+    ResponseRecipe recipe = new ResponseRecipe();
     recipe.setCost("1000");
     recipe.setMakingTime("45分");
     recipe.setIngredients("玉ねぎ,肉,スパイス");

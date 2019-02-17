@@ -1,7 +1,7 @@
 package recipesystem.domain.service;
 
-import recipesystem.application.payload.RequestRecipe;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
+import recipesystem.domain.model.RequestRecipe;
 
 /**
  * レシピの新規作成サービス.
@@ -14,6 +14,6 @@ public interface CreateRecipeService {
    * @param recipe 新規作成するレシピ情報.
    * @return 作成されたレシピ情報.
    */
-  public Recipe create(RequestRecipe recipe);
+  public ResponseRecipe create(RequestRecipe recipe);
   
 }

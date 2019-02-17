@@ -17,7 +17,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.RequestRecipe;
+import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
@@ -55,10 +56,11 @@ public class UpdateRecipeServiceImplTest {
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
-    Recipe requestRecipe = createRequestRecipe();
-    Recipe actual = testTarget.update(2, requestRecipe);
+    RequestRecipe requestRecipe = createRequestRecipe();
+    ResponseRecipe actual = testTarget.update(2, requestRecipe);
+    ResponseRecipe expected = createExpectedRequestRecipe();
     
-    assertThat(actual, is(samePropertyValuesAs(requestRecipe)));
+    assertThat(actual, is(samePropertyValuesAs(expected)));
     Optional<RecipeEntity> findResult = recipeRepository.findById(2);
     assertThat(findResult.isPresent(), is(equalTo(true)));
     RecipeEntity readEntity = findResult.get();
@@ -72,14 +74,24 @@ public class UpdateRecipeServiceImplTest {
     
   }
 
-  private Recipe createRequestRecipe() {
-    Recipe requestRecipe = new Recipe();
+  private RequestRecipe createRequestRecipe() {
+    RequestRecipe requestRecipe = new RequestRecipe();
     requestRecipe.setTitle("トマトスープレシピ");
     requestRecipe.setMakingTime("15分");
     requestRecipe.setServes("5人");
     requestRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
-    requestRecipe.setCost("450");
+    requestRecipe.setCost(450);
     return requestRecipe;
+  }
+  
+  private ResponseRecipe createExpectedRequestRecipe() {
+    ResponseRecipe expectedRecipe = new ResponseRecipe();
+    expectedRecipe.setTitle("トマトスープレシピ");
+    expectedRecipe.setMakingTime("15分");
+    expectedRecipe.setServes("5人");
+    expectedRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
+    expectedRecipe.setCost("450");
+    return expectedRecipe;
   }
 
 }

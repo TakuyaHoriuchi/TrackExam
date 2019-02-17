@@ -17,7 +17,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
@@ -55,8 +55,8 @@ public class ReadRecipeServiceImplTest {
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
-    List<Recipe> actual = testTarget.readAll();
-    List<Recipe> expected = createAllRecipes();
+    List<ResponseRecipe> actual = testTarget.readAll();
+    List<ResponseRecipe> expected = createAllRecipes();
     
     assertThat(actual, is(samePropertyValuesAs(expected)));
   }
@@ -66,14 +66,14 @@ public class ReadRecipeServiceImplTest {
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
-    Recipe actual = testTarget.read(1);
-    Recipe expected = createExpectedRecipe();
+    ResponseRecipe actual = testTarget.read(1);
+    ResponseRecipe expected = createExpectedRecipe();
     
     assertThat(actual, is(samePropertyValuesAs(expected)));
   }
 
-  private List<Recipe> createAllRecipes() {
-    Recipe firstRecipe = new Recipe();
+  private List<ResponseRecipe> createAllRecipes() {
+    ResponseRecipe firstRecipe = new ResponseRecipe();
     firstRecipe.setId(Long.valueOf(1));
     firstRecipe.setTitle("チキンカレー");
     firstRecipe.setMakingTime("45分");
@@ -81,7 +81,7 @@ public class ReadRecipeServiceImplTest {
     firstRecipe.setIngredients("玉ねぎ,肉,スパイス");
     firstRecipe.setCost("1000");
     
-    Recipe secondRecipe = new Recipe();
+    ResponseRecipe secondRecipe = new ResponseRecipe();
     secondRecipe.setId(Long.valueOf(2));
     secondRecipe.setTitle("オムライス");
     secondRecipe.setMakingTime("30分");
@@ -89,7 +89,7 @@ public class ReadRecipeServiceImplTest {
     secondRecipe.setIngredients("玉ねぎ,卵,スパイス,醤油");
     secondRecipe.setCost("700");
     
-    Recipe thirdRecipe = new Recipe();
+    ResponseRecipe thirdRecipe = new ResponseRecipe();
     thirdRecipe.setId(Long.valueOf(3));
     thirdRecipe.setTitle("トマトスープ");
     thirdRecipe.setMakingTime("15分");
@@ -97,7 +97,7 @@ public class ReadRecipeServiceImplTest {
     thirdRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
     thirdRecipe.setCost("450");
     
-    List<Recipe> recipes = new ArrayList<>();
+    List<ResponseRecipe> recipes = new ArrayList<>();
     recipes.add(firstRecipe);
     recipes.add(secondRecipe);
     recipes.add(thirdRecipe);
@@ -105,8 +105,8 @@ public class ReadRecipeServiceImplTest {
     return recipes;
   }
   
-  private Recipe createExpectedRecipe() {
-    Recipe recipe = new Recipe();
+  private ResponseRecipe createExpectedRecipe() {
+    ResponseRecipe recipe = new ResponseRecipe();
     recipe.setCost("1000");
     recipe.setMakingTime("45分");
     recipe.setIngredients("玉ねぎ,肉,スパイス");

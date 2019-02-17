@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import recipesystem.application.payload.RecipeInfoResponse;
-import recipesystem.application.payload.RequestRecipe;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
+import recipesystem.domain.model.RequestRecipe;
 import recipesystem.domain.service.CreateRecipeService;
 
 /**
@@ -32,11 +32,11 @@ public class CreateRecipeController {
   @PostMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public RecipeInfoResponse createRecipe(@RequestBody RequestRecipe recipe) {
-    Recipe createdRecipe = recipeService.create(recipe);
+    ResponseRecipe createdRecipe = recipeService.create(recipe);
     return generateResponse(createdRecipe);
   }
 
-  private RecipeInfoResponse generateResponse(Recipe createdRecipe) {
+  private RecipeInfoResponse generateResponse(ResponseRecipe createdRecipe) {
     RecipeInfoResponse response = new RecipeInfoResponse();
     if (createdRecipe == null) {
       response.setMessage("Recipe creation failed!");

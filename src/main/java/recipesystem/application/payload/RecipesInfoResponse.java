@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import lombok.Data;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -12,5 +12,5 @@ public class RecipesInfoResponse {
   @JsonProperty("message")
   private String message;
   @JsonProperty("recipes")
-  private List<Recipe> recipes;
+  private List<ResponseRecipe> recipes;
 }

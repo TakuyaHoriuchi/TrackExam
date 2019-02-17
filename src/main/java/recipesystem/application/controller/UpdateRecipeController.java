@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import recipesystem.application.payload.RecipeInfoResponse;
-import recipesystem.application.payload.RequestRecipe;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
+import recipesystem.domain.model.RequestRecipe;
 import recipesystem.domain.service.UpdateRecipeService;
 
 /**
@@ -35,11 +35,11 @@ public class UpdateRecipeController {
   @ResponseStatus(value = HttpStatus.OK)
   public RecipeInfoResponse updateRecipe(@PathVariable("id") int id,
                                          @RequestBody RequestRecipe recipe) {
-    Recipe updatedRecipe = recipeService.update(id, recipe);
+    ResponseRecipe updatedRecipe = recipeService.update(id, recipe);
     return generateRecipeResponse(updatedRecipe);
   }
   
-  private RecipeInfoResponse generateRecipeResponse(Recipe updatedRecipe) {
+  private RecipeInfoResponse generateRecipeResponse(ResponseRecipe updatedRecipe) {
     RecipeInfoResponse response = new RecipeInfoResponse();
     if (updatedRecipe == null) {
       response.setMessage("Fail to update Recipe");

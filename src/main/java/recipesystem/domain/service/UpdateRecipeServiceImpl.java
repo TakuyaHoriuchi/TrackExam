@@ -4,8 +4,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import recipesystem.application.payload.RequestRecipe;
-import recipesystem.domain.model.Recipe;
+import recipesystem.domain.model.ResponseRecipe;
+import recipesystem.domain.model.RequestRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
@@ -23,7 +23,7 @@ public class UpdateRecipeServiceImpl implements UpdateRecipeService {
    * {@inheritDoc}.
    */
   @Override
-  public Recipe update(int id, RequestRecipe recipe) {
+  public ResponseRecipe update(int id, RequestRecipe recipe) {
     Optional<RecipeEntity> result = recipeRepos.findById(id);
     if (!result.isPresent()) {
       return null;
@@ -34,8 +34,8 @@ public class UpdateRecipeServiceImpl implements UpdateRecipeService {
     return mapperResponseFromResult(savedEntity);
   }
 
-  private Recipe mapperResponseFromResult(RecipeEntity savedEntity) {
-    Recipe response = new Recipe();
+  private ResponseRecipe mapperResponseFromResult(RecipeEntity savedEntity) {
+    ResponseRecipe response = new ResponseRecipe();
     response.setTitle(savedEntity.getTitle());
     response.setMakingTime(savedEntity.getMakingTime());
     response.setServes(savedEntity.getServes());

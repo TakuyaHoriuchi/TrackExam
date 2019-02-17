@@ -1,4 +1,4 @@
-package recipesystem.application.payload;
+package recipesystem.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
