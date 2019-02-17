@@ -6,7 +6,6 @@ import lombok.Data;
 
 /**
  * レスポンス表示用のレシピクラス.
- *
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)

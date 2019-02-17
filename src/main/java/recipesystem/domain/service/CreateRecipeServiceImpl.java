@@ -2,9 +2,8 @@ package recipesystem.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.model.ResponseRecipe;
-import recipesystem.domain.model.RequestRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
 
@@ -21,7 +20,7 @@ public class CreateRecipeServiceImpl implements CreateRecipeService {
    * {@inheritDoc}.
    */
   @Override
-  public ResponseRecipe create(RequestRecipe recipe) {
+  public ResponseRecipe create(Recipe recipe) {
     if (recipe.getTitle() == null
         || recipe.getServes() == null
         || recipe.getMakingTime() == null

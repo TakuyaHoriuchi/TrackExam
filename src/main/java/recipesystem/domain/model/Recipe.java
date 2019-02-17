@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RequestRecipe {
+public class Recipe {
   /* レシピid. */
   @JsonProperty("id")
   private Long id;

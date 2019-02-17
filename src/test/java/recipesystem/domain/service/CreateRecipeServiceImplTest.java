@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import recipesystem.domain.model.RequestRecipe;
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
@@ -47,7 +47,7 @@ public class CreateRecipeServiceImplTest {
   
   @Test
   public void test_SuccessToCreateRecipe() {
-    RequestRecipe recipe = createSuccessRecipe();
+    Recipe recipe = createSuccessRecipe();
     if (recipeRepository.count() != 2) {
       fail("Tableの初期化に失敗しました。");
     }
@@ -58,8 +58,8 @@ public class CreateRecipeServiceImplTest {
     assertThat(recipeRepository.count(), is(equalTo(3L)));
   }
   
-  private RequestRecipe createSuccessRecipe() {
-    RequestRecipe requestRecipe = new RequestRecipe();
+  private Recipe createSuccessRecipe() {
+    Recipe requestRecipe = new Recipe();
     requestRecipe.setCost(450);
     requestRecipe.setMakingTime("15分");
     requestRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");

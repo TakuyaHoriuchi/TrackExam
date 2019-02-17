@@ -1,7 +1,7 @@
 package recipesystem.domain.service;
 
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.model.ResponseRecipe;
-import recipesystem.domain.model.RequestRecipe;
 
 /**
  * レシピ情報を更新するサービスクラス.
@@ -14,6 +14,6 @@ public interface UpdateRecipeService {
    * @param recipe レシピの更新情報.
    * @return 更新レシピ情報.
    */
-  public ResponseRecipe update(int id, RequestRecipe recipe);
+  public ResponseRecipe update(int id, Recipe recipe);
 
 }

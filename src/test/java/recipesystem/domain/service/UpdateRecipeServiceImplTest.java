@@ -7,7 +7,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.util.Optional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +15,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import recipesystem.domain.model.RequestRecipe;
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
@@ -56,7 +54,7 @@ public class UpdateRecipeServiceImplTest {
     if (recipeRepository.count() != 3) {
       fail("Tableの初期化に失敗しました。");
     }
-    RequestRecipe requestRecipe = createRequestRecipe();
+    Recipe requestRecipe = createRequestRecipe();
     ResponseRecipe actual = testTarget.update(2, requestRecipe);
     ResponseRecipe expected = createExpectedRequestRecipe();
     
@@ -74,8 +72,8 @@ public class UpdateRecipeServiceImplTest {
     
   }
 
-  private RequestRecipe createRequestRecipe() {
-    RequestRecipe requestRecipe = new RequestRecipe();
+  private Recipe createRequestRecipe() {
+    Recipe requestRecipe = new Recipe();
     requestRecipe.setTitle("トマトスープレシピ");
     requestRecipe.setMakingTime("15分");
     requestRecipe.setServes("5人");

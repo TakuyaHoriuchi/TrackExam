@@ -11,10 +11,9 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import recipesystem.application.controller.UpdateRecipeController;
 import recipesystem.application.payload.RecipeInfoResponse;
-import recipesystem.domain.model.RequestRecipe;
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.model.ResponseRecipe;
 import recipesystem.domain.service.UpdateRecipeService;
 
@@ -36,7 +35,7 @@ public class UpdateRecipeControllerTest {
   @Test
   public void test_SuccessToUpdateRecipe() {
     // setup
-    RequestRecipe requestRecipe = createSuccessRequestRecipe();
+    Recipe requestRecipe = createSuccessRequestRecipe();
     ResponseRecipe responseRecipe = createSuccessResponseRecipe();
     when(recipeService.update(2, requestRecipe)).thenReturn(responseRecipe);
     
@@ -54,7 +53,7 @@ public class UpdateRecipeControllerTest {
   @Test
   public void test_FailToUpdateRecipe() {
     // setup
-    RequestRecipe recipe = new RequestRecipe();
+    Recipe recipe = new Recipe();
     when(recipeService.update(100, recipe)).thenReturn(null);
     
     // execute
@@ -67,8 +66,8 @@ public class UpdateRecipeControllerTest {
     assertThat(actual.getMessage(), is(equalTo(expectedMessage)));
   }
   
-  private RequestRecipe createSuccessRequestRecipe() {
-    RequestRecipe requestRecipe = new RequestRecipe();
+  private Recipe createSuccessRequestRecipe() {
+    Recipe requestRecipe = new Recipe();
     requestRecipe.setTitle("トマトスープレシピ");
     requestRecipe.setMakingTime("15分");
     requestRecipe.setServes("5人");

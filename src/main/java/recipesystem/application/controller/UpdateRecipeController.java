@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import recipesystem.application.payload.RecipeInfoResponse;
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.model.ResponseRecipe;
-import recipesystem.domain.model.RequestRecipe;
 import recipesystem.domain.service.UpdateRecipeService;
 
 /**
@@ -34,7 +33,7 @@ public class UpdateRecipeController {
   @PatchMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public RecipeInfoResponse updateRecipe(@PathVariable("id") int id,
-                                         @RequestBody RequestRecipe recipe) {
+                                         @RequestBody Recipe recipe) {
     ResponseRecipe updatedRecipe = recipeService.update(id, recipe);
     return generateRecipeResponse(updatedRecipe);
   }

@@ -11,11 +11,10 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import recipesystem.application.controller.CreateRecipeController;
 import recipesystem.application.payload.RecipeInfoResponse;
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.model.ResponseRecipe;
-import recipesystem.domain.model.RequestRecipe;
 import recipesystem.domain.service.CreateRecipeService;
 
 /**
@@ -36,7 +35,7 @@ public class CreateRecipeControllerTest {
   @Test
   public void test_SuccessToCreateRecipe() {
     // setup
-    RequestRecipe requestRecipe = createSuccessRequestRecipe();
+    Recipe requestRecipe = createSuccessRequestRecipe();
     ResponseRecipe responseRecipe = createSuccessResponseRecipe();
     when(recipeService.create(requestRecipe)).thenReturn(responseRecipe);
     
@@ -53,7 +52,7 @@ public class CreateRecipeControllerTest {
   @Test
   public void test_FailToCreateRecipe() {
     // setup
-    RequestRecipe requestRecipe = new RequestRecipe();
+    Recipe requestRecipe = new Recipe();
     when(recipeService.create(requestRecipe)).thenReturn(null);
     
     RecipeInfoResponse actual = testTarget.createRecipe(requestRecipe);
@@ -65,8 +64,8 @@ public class CreateRecipeControllerTest {
     assertThat(actual.getRequired(), is(equalTo(expectedRequired)));
   }
 
-  private RequestRecipe createSuccessRequestRecipe() {
-    RequestRecipe requestRecipe = new RequestRecipe();
+  private Recipe createSuccessRequestRecipe() {
+    Recipe requestRecipe = new Recipe();
     requestRecipe.setCost(450);
     requestRecipe.setMakingTime("15分");
     requestRecipe.setIngredients("玉ねぎ, トマト, スパイス, 水");
