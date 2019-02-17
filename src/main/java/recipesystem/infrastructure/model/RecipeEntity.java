@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * レシピ情報を扱うドメインクラス.
+ * レシピ情報を扱うエンティティクラス.
  */
 @Data
 @Entity
