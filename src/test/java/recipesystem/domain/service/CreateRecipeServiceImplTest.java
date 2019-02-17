@@ -50,7 +50,7 @@ public class CreateRecipeServiceImplTest {
     Recipe actual = testTarget.create(recipe);
     
     assertThat(actual, is(samePropertyValuesAs(recipe)));
-//    assertThat(recipeRepository.count(), is(equalTo(3)));
+    assertThat(recipeRepository.count(), is(equalTo(3L)));
   }
   
   private Recipe createSuccessRecipe() {

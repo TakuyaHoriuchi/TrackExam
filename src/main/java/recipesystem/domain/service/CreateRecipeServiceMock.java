@@ -8,7 +8,7 @@ import recipesystem.domain.model.Recipe;
  * {@link:CreateRecipeService}のStub実装クラス.
  * 実装後に削除する.
  */
-@Component
+//@Component
 public class CreateRecipeServiceMock implements CreateRecipeService {
 
   @Override
