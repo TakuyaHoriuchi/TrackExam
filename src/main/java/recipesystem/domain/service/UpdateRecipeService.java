@@ -1,5 +1,6 @@
 package recipesystem.domain.service;
 
+import recipesystem.application.payload.RequestRecipe;
 import recipesystem.domain.model.Recipe;
 
 /**
@@ -13,6 +14,6 @@ public interface UpdateRecipeService {
    * @param recipe レシピの更新情報.
    * @return 更新レシピ情報.
    */
-  public Recipe update(int id, Recipe recipe);
+  public Recipe update(int id, RequestRecipe recipe);
 
 }

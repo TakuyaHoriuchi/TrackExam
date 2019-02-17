@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import recipesystem.application.payload.RecipeInfoResponse;
+import recipesystem.application.payload.RequestRecipe;
 import recipesystem.domain.model.Recipe;
 import recipesystem.domain.service.UpdateRecipeService;
 
@@ -33,7 +34,7 @@ public class UpdateRecipeController {
   @PatchMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public RecipeInfoResponse updateRecipe(@PathVariable("id") int id,
-                                         @RequestBody Recipe recipe) {
+                                         @RequestBody RequestRecipe recipe) {
     Recipe updatedRecipe = recipeService.update(id, recipe);
     return generateRecipeResponse(updatedRecipe);
   }

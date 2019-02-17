@@ -3,6 +3,8 @@ package recipesystem.domain.service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import recipesystem.application.payload.RequestRecipe;
 import recipesystem.domain.model.Recipe;
 import recipesystem.domain.repository.RecipeRepository;
 import recipesystem.infrastructure.model.RecipeEntity;
@@ -21,7 +23,7 @@ public class UpdateRecipeServiceImpl implements UpdateRecipeService {
    * {@inheritDoc}.
    */
   @Override
-  public Recipe update(int id, Recipe recipe) {
+  public Recipe update(int id, RequestRecipe recipe) {
     Optional<RecipeEntity> result = recipeRepos.findById(id);
     if (!result.isPresent()) {
       return null;
@@ -42,12 +44,12 @@ public class UpdateRecipeServiceImpl implements UpdateRecipeService {
     return response;
   }
 
-  private void mapperPayloadToRequest(Recipe requestRecipe, RecipeEntity recipeEntity) {
+  private void mapperPayloadToRequest(RequestRecipe requestRecipe, RecipeEntity recipeEntity) {
     recipeEntity.setTitle(requestRecipe.getTitle());
     recipeEntity.setMakingTime(requestRecipe.getMakingTime());
     recipeEntity.setServes(requestRecipe.getServes());
     recipeEntity.setIngredients(requestRecipe.getIngredients());
-    recipeEntity.setCost(Integer.parseInt(requestRecipe.getCost()));
+    recipeEntity.setCost(requestRecipe.getCost());
   }
 
 }
