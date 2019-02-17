@@ -1,2 +1,4 @@
 # target 配下のignore
 /target/*
+# trackの試験結果のignore
+/softbank-training_challenge_1/.track/

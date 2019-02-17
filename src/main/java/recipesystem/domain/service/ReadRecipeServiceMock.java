@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import recipesystem.application.payload.Recipe;
+import recipesystem.domain.model.Recipe;
 
 /**
  * {@link:ReadRecipeService}のStub実装クラス.

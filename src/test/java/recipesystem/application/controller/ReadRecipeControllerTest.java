@@ -16,9 +16,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import recipesystem.application.controller.ReadRecipeController;
-import recipesystem.application.payload.Recipe;
 import recipesystem.application.payload.RecipeInfoResponse;
 import recipesystem.application.payload.RecipesInfoResponse;
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.service.ReadRecipeService;
 
 /**

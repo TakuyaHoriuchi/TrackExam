@@ -1,6 +1,6 @@
 package recipesystem.domain.service;
 
-import recipesystem.application.payload.Recipe;
+import recipesystem.domain.model.Recipe;
 
 /**
  * レシピ情報を更新するサービスクラス.

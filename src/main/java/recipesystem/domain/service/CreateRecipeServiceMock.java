@@ -2,7 +2,7 @@ package recipesystem.domain.service;
 
 import org.springframework.stereotype.Component;
 
-import recipesystem.application.payload.Recipe;
+import recipesystem.domain.model.Recipe;
 
 /**
  * {@link:CreateRecipeService}のStub実装クラス.

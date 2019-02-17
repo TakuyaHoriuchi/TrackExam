@@ -13,8 +13,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import recipesystem.application.controller.CreateRecipeController;
-import recipesystem.application.payload.Recipe;
 import recipesystem.application.payload.RecipeInfoResponse;
+import recipesystem.domain.model.Recipe;
 import recipesystem.domain.service.CreateRecipeService;
 
 /**

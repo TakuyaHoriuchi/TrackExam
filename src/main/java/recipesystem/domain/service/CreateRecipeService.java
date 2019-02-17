@@ -1,6 +1,6 @@
 package recipesystem.domain.service;
 
-import recipesystem.application.payload.Recipe;
+import recipesystem.domain.model.Recipe;
 
 public interface CreateRecipeService {
 
@@ -11,7 +11,5 @@ public interface CreateRecipeService {
    * @return 作成されたレシピ情報.
    */
   public Recipe create(Recipe recipe);
-  
-  
   
 }

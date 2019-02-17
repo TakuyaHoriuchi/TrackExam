@@ -2,7 +2,7 @@ package recipesystem.domain.service;
 
 import java.util.List;
 
-import recipesystem.application.payload.Recipe;
+import recipesystem.domain.model.Recipe;
 
 /**
  * レシピ情報を取得するサービスクラス.
